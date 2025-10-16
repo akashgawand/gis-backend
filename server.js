@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 5000;
 
 const allowed = [
   'http://localhost:5173',
-  'https://gis-frontend-jvf4axebw-akashgawands-projects.vercel.app'
+  'https://gis-frontend-jvf4axebw-akashgawands-projects.vercel.app',
+  'https://gis-frontend-jg3repti7-akashgawands-projects.vercel.app'
 ];
 
 
