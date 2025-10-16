@@ -13,7 +13,32 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 
-app.use(cors({ origin: ['https://gis-frontend-jvf4axebw-akashgawands-projects.vercel.app/'], credentials: false }))
+import cors from 'cors';
+
+
+const allowed = [
+  'http://localhost:5173',
+  'https://gis-frontend-jvf4axebw-akashgawands-projects.vercel.app'
+];
+
+app.use(cors({
+  origin: (origin, cb) => {
+   
+    if (!origin || allowed.includes(origin)) return cb(null, true);
+    return cb(new Error('Not allowed by CORS'));
+  },
+  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type', 'x-access-token', 'Authorization'],
+  optionsSuccessStatus: 200
+}));
+
+
+app.options('*', cors({
+  origin: (origin, cb) => {
+    if (!origin || allowed.includes(origin)) return cb(null, true);
+    return cb(new Error('Not allowed by CORS'));
+  }
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
