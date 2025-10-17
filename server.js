@@ -12,22 +12,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowed = [
-  'http://localhost:5173',
-  'https://gis-frontend-jvf4axebw-akashgawands-projects.vercel.app',
-  'https://gis-frontend-jg3repti7-akashgawands-projects.vercel.app'
-];
+app.use(cors());
 
-
-app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin || allowed.includes(origin)) return cb(null, true);
-    return cb(new Error('Not allowed by CORS'));
-  },
-  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type', 'x-access-token', 'Authorization'],
-  optionsSuccessStatus: 200
-}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
